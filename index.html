@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YFBadranAI – Deine Intelligente KI-Plattform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .glass-effect {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 glass-effect">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-500/30">
+          YF
+        </div>
+        <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
+          YFBadranAI
+        </span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
+          System Online
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-5xl w-full mx-auto p-4 flex flex-col my-4">
+    
+    <!-- Hero Header -->
+    <div class="text-center my-6 space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        Wie kann YFBadranAI dir heute helfen?
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+        Erstelle Texte, analysiere Daten, generiere Code oder stelle Fragen – deine persönliche KI steht bereit.
+      </p>
+    </div>
+
+    <!-- Quick Prompts Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+      <button onclick="usePrompt('Erstelle eine professionelle E-Mail für einen Kundentermin.')" class="p-4 rounded-xl glass-effect hover:border-indigo-500/50 transition-all text-left group">
+        <div class="text-indigo-400 mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib text-lg"></i></div>
+        <div class="font-semibold text-sm text-slate-200">Text & Mail entwerfen</div>
+        <div class="text-xs text-slate-400 mt-1">Professionelle Schreiben & E-Mails generieren</div>
+      </button>
+
+      <button onclick="usePrompt('Schreibe einen HTML/CSS-Button im Dark-Design.')" class="p-4 rounded-xl glass-effect hover:border-indigo-500/50 transition-all text-left group">
+        <div class="text-purple-400 mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-code text-lg"></i></div>
+        <div class="font-semibold text-sm text-slate-200">Code Generieren</div>
+        <div class="text-xs text-slate-400 mt-1">HTML, Python, React oder SQL schreiben</div>
+      </button>
+
+      <button onclick="usePrompt('Erkläre mir den Unterschied zwischen Freelancing und Anstellung.')" class="p-4 rounded-xl glass-effect hover:border-indigo-500/50 transition-all text-left group">
+        <div class="text-pink-400 mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-lightbulb text-lg"></i></div>
+        <div class="font-semibold text-sm text-slate-200">Wissen & Analyse</div>
+        <div class="text-xs text-slate-400 mt-1">Komplexe Themen einfach erklärt bekommen</div>
+      </button>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="flex-1 glass-effect rounded-2xl flex flex-col overflow-hidden min-h-[400px]">
+      
+      <!-- Messages Area -->
+      <div id="chatHistory" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 max-h-[500px]">
+        <!-- Welcome Message -->
+        <div class="flex items-start space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-sm shrink-0">YF</div>
+          <div class="bg-slate-800/80 border border-slate-700/50 rounded-2xl p-4 text-sm leading-relaxed max-w-[85%] text-slate-200">
+            Hallo! Ich bin <strong>YFBadranAI</strong>. Wie kann ich dich heute bei deinen Projekten oder Fragen unterstützen?
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="p-4 border-t border-slate-800 bg-slate-900/50">
+        <form id="chatForm" class="flex gap-2">
+          <input 
+            type="text" 
+            id="userInput" 
+            placeholder="Schreibe eine Nachricht an YFBadranAI..." 
+            class="flex-1 bg-slate-950 border border-slate-700/60 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500 text-slate-100 placeholder-slate-500 transition-colors"
+            required
+          >
+          <button 
+            type="submit" 
+            class="bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-medium px-5 py-3 rounded-xl transition-all flex items-center justify-center shadow-lg shadow-indigo-600/20"
+          >
+            <i class="fa-solid fa-paper-plane text-sm"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-800/50">
+    YFBadranAI Engine &copy; 2026 – Bereitgestellt über Vercel / Netlify
+  </footer>
+
+  <script>
+    const chatHistory = document.getElementById('chatHistory');
+    const chatForm = document.getElementById('chatForm');
+    const userInput = document.getElementById('userInput');
+
+    function appendUserMessage(text) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'flex items-start justify-end space-x-3';
+      msgDiv.innerHTML = `
+        <div class="bg-indigo-600/90 text-white rounded-2xl p-4 text-sm leading-relaxed max-w-[85%] shadow-md">
+          ${escapeHtml(text)}
+        </div>
+      `;
+      chatHistory.appendChild(msgDiv);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    function appendAIMessage(text) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'flex items-start space-x-3';
+      msgDiv.innerHTML = `
+        <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-sm shrink-0">YF</div>
+        <div class="bg-slate-800/80 border border-slate-700/50 rounded-2xl p-4 text-sm leading-relaxed max-w-[85%] text-slate-200">
+          ${text}
+        </div>
+      `;
+      chatHistory.appendChild(msgDiv);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    function generateAIResponse(prompt) {
+      const lower = prompt.toLowerCase();
+      if (lower.includes('hallo') || lower.includes('hi')) {
+        return "Hallo! Ich bin YFBadranAI. Schön, dich zu sehen! Womit starten wir heute?";
+      } else if (lower.includes('code') || lower.includes('html') || lower.includes('button')) {
+        return "Hier ist ein modernes Beispiel:<br><br><code class='bg-slate-900 p-2 rounded block text-indigo-300 font-mono text-xs'>&lt;button class='bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg'&gt;YFBadranAI Action&lt;/button&gt;</code>";
+      } else if (lower.includes('mail') || lower.includes('termin')) {
+        return "<strong>Vorschlag für die E-Mail:</strong><br><br>Sehr geehrte Damen und Herren,<br>vielen Dank für Ihr Interesse an YFBadranAI. Gerne bestätige ich unseren Termin zum Besprechen Ihres Softwareprojekts.<br><br>Mit freundlichen Grüßen,<br>YFBadran Team";
+      } else {
+        return `Vielen Dank für deine Anfrage zu <strong>"${escapeHtml(prompt)}"</strong>. Als YFBadranAI Assistent helfe ich dir bei der Umsetzung von Systemarchitektur, Code-Generierung und Digitalisierung. Kann ich dir konkrete Code-Muster dazu bereitstellen?`;
+      }
+    }
+
+    function usePrompt(text) {
+      userInput.value = text;
+      chatForm.dispatchEvent(new Event('submit'));
+    }
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      appendUserMessage(text);
+      userInput.value = '';
+
+      setTimeout(() => {
+        const response = generateAIResponse(text);
+        appendAIMessage(response);
+      }, 600);
+    });
+
+    function escapeHtml(string) {
+      return String(string).replace(/[&<>"']/g, function (s) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[s];
+      });
+    }
+  </script>
+</body>
+</html>
